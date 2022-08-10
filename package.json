@@ -1,6 +1,6 @@
 {
   "name": "node-redis-mongo",
-  "version": "16.16.0",
+  "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/NAZIYASHAIK1695/webelight_practical_test-master.git",
   "scripts": {
