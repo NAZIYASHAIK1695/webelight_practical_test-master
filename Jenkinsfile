@@ -1,25 +1,26 @@
 pipeline {
-    agent any 
-        tools{
+    agent any
+    tools{
         nodejs 'nodejs16.16'
     }
+
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh "npm install"
+                sh "npm run build"
+            
             }
         }
     }
-        stage('Test') {
+       stage('Push To ECR') {
             steps {
-                sh './jenkins/scripts/test.sh'
+                sh "docker build -t frontend_app ."
             }
         }
-        stage('Deliver') {
+        stage('reomte ec2') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
-                input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh './jenkins/scripts/kill.sh'
+                sh "ansible-playbook playbook.yml"
             }
         }
 }
