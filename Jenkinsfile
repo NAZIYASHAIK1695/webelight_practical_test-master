@@ -8,19 +8,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh "npm install"
-                sh "npm run build"
+                sh "npm run "
             
             }
         }
     }
-       stage('Push To ECR') {
-            steps {
-                sh "docker build -t frontend_app ."
-            }
-        }
-        stage('reomte ec2') {
-            steps {
-                sh "ansible-playbook playbook.yml"
-            }
-        }
 }
