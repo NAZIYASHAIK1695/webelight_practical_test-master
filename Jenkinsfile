@@ -1,11 +1,7 @@
 pipeline {
-    agent {
-        docker {
-            image 'node16-alpine'
-        }
-    }
-    environment {
-        CI = 'true'
+    agent any 
+        tools{
+        nodejs 'nodejs16.16'
     }
     stages {
         stage('Build') {
@@ -13,6 +9,7 @@ pipeline {
                 sh 'npm install'
             }
         }
+    }
         stage('Test') {
             steps {
                 sh './jenkins/scripts/test.sh'
@@ -25,5 +22,4 @@ pipeline {
                 sh './jenkins/scripts/kill.sh'
             }
         }
-    }
 }
